@@ -39,7 +39,7 @@
 
 set_global_assignment -name FAMILY "MAX 10"
 set_global_assignment -name DEVICE 10M50DAF484C7G
-set_global_assignment -name TOP_LEVEL_ENTITY uart_top
+set_global_assignment -name TOP_LEVEL_ENTITY uart_stopwatch
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 23.1STD.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "06:00:18  APRIL 17, 2025"
 set_global_assignment -name LAST_QUARTUS_VERSION "23.1std.1 Lite Edition"
@@ -56,62 +56,107 @@ set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 
 
-set_location_assignment PIN_C10 -to sw[0]
-set_location_assignment PIN_C11 -to sw[1]
-set_location_assignment PIN_D12 -to sw[2]
-set_location_assignment PIN_C12 -to sw[3]
-set_location_assignment PIN_A12 -to sw[4]
-set_location_assignment PIN_B12 -to sw[5]
-set_location_assignment PIN_A13 -to sw[6]
-set_location_assignment PIN_A14 -to sw[7]
 
 set_location_assignment PIN_P11 -to clk
 set_location_assignment PIN_B14 -to reset
-set_location_assignment PIN_B8 -to write
-set_location_assignment PIN_A7 -to read
 
 
-set_location_assignment PIN_A8 -to read_value[0]
-set_location_assignment PIN_A9 -to read_value[1]
-set_location_assignment PIN_A10 -to read_value[2]
-set_location_assignment PIN_B10 -to read_value[3]
-set_location_assignment PIN_D13 -to read_value[4]
-set_location_assignment PIN_C13 -to read_value[5]
-set_location_assignment PIN_E14 -to read_value[6]
-set_location_assignment PIN_D14 -to read_value[7]
 
 set_location_assignment PIN_V10 -to tx
 set_location_assignment PIN_V9 -to rx
 
+
+
+
+# sseg0 [7:0] → HEX0 → PIN_C14 to PIN_D15
+set_location_assignment PIN_C14 -to sseg0[0]
+set_location_assignment PIN_E15 -to sseg0[1]
+set_location_assignment PIN_C15 -to sseg0[2]
+set_location_assignment PIN_C16 -to sseg0[3]
+set_location_assignment PIN_E16 -to sseg0[4]
+set_location_assignment PIN_D17 -to sseg0[5]
+set_location_assignment PIN_C17 -to sseg0[6]
+set_location_assignment PIN_D15 -to sseg0[7]
+
+# sseg1 [7:0] → HEX1 → PIN_C18 to PIN_B16
+set_location_assignment PIN_C18 -to sseg1[0]
+set_location_assignment PIN_D18 -to sseg1[1]
+set_location_assignment PIN_E18 -to sseg1[2]
+set_location_assignment PIN_B16 -to sseg1[3]
+set_location_assignment PIN_A17 -to sseg1[4]
+set_location_assignment PIN_A18 -to sseg1[5]
+set_location_assignment PIN_B17 -to sseg1[6]
+set_location_assignment PIN_A16 -to sseg1[7]
+# Assume pins for segments [4] to [6] not connected
+# DP not shown for HEX1 → optional (if you want, reassign or leave floating)
+
+# sseg2 [7:0] → HEX2 → PIN_B20 to PIN_A19
+set_location_assignment PIN_B20 -to sseg2[0]
+set_location_assignment PIN_A20 -to sseg2[1]
+set_location_assignment PIN_B19 -to sseg2[2]
+set_location_assignment PIN_A21 -to sseg2[3]
+set_location_assignment PIN_B21 -to sseg2[4]
+set_location_assignment PIN_C22 -to sseg2[5]
+set_location_assignment PIN_B22 -to sseg2[6]
+set_location_assignment PIN_A19 -to sseg2[7]
+
+
+set_location_assignment PIN_F21 -to sseg3[0]
+set_location_assignment PIN_E22 -to sseg3[1]
+set_location_assignment PIN_E21 -to sseg3[2]
+set_location_assignment PIN_C19 -to sseg3[3]
+set_location_assignment PIN_C20 -to sseg3[4]
+set_location_assignment PIN_D19 -to sseg3[5]
+set_location_assignment PIN_E17 -to sseg3[6]
+set_location_assignment PIN_D22 -to sseg3[7]
+
+set_location_assignment PIN_A8 -to leds[0]
+set_location_assignment PIN_A9 -to leds[1]
+set_location_assignment PIN_A10 -to leds[2]
+set_location_assignment PIN_B10 -to leds[3]
+set_location_assignment PIN_D13 -to leds[4]
+set_location_assignment PIN_C13 -to leds[5]
+set_location_assignment PIN_E14 -to leds[6]
+set_location_assignment PIN_D14 -to leds[7]
+
+
+set_global_assignment -name ENABLE_OCT_DONE ON
+set_global_assignment -name USE_CONFIGURATION_DEVICE ON
+set_global_assignment -name CRC_ERROR_OPEN_DRAIN OFF
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_WEAK_PULLUP "AS OUTPUT DRIVING GROUND"
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
+set_location_assignment PIN_B11 -to status_ready
+
+set_location_assignment PIN_A11 -to receive_reg
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to tx
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to rx
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to clk
-
-
-set_location_assignment PIN_C14 -to sseg[0]
-set_location_assignment PIN_E15 -to sseg[1]
-set_location_assignment PIN_C15 -to sseg[2]
-set_location_assignment PIN_C16 -to sseg[3]
-set_location_assignment PIN_E16 -to sseg[4]
-set_location_assignment PIN_D17 -to sseg[5]
-set_location_assignment PIN_C17 -to sseg[6]
-set_location_assignment PIN_D15 -to sseg[7]
-
-
-
+set_global_assignment -name VERILOG_FILE uart_stopwatch.v
+set_global_assignment -name VERILOG_FILE uart_top.v
+set_global_assignment -name VERILOG_FILE stopwatch.v
+set_global_assignment -name VERILOG_FILE send2PC.v
+set_global_assignment -name VERILOG_FILE encode_ascii.v
+set_global_assignment -name VERILOG_FILE clk_div_26bit.v
+set_global_assignment -name VERILOG_FILE bin2bcd_tb.v
+set_global_assignment -name VERILOG_FILE bin2bcd.v
+set_global_assignment -name VERILOG_FILE bcd2sseg_active_low.v
+set_global_assignment -name VERILOG_FILE bcd_counter.v
 set_global_assignment -name VERILOG_FILE division.v
 set_global_assignment -name VERILOG_FILE uart_tx.v
-set_global_assignment -name VERILOG_FILE uart_top.v
 set_global_assignment -name VERILOG_FILE uart_rx.v
 set_global_assignment -name VERILOG_FILE uart_reg.v
 set_global_assignment -name VERILOG_FILE uart.v
 set_global_assignment -name VERILOG_FILE m_counter.v
 set_global_assignment -name VERILOG_FILE fifo.v
 set_global_assignment -name VERILOG_FILE fall_edge_detector.v
-set_location_assignment PIN_A11 -to ready
+
+
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

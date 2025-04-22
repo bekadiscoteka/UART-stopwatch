@@ -17,14 +17,12 @@
 		(
 			output [WIDTH-1:0] data_out,
 			output 	tx_full, tx_empty, tx, 
-					rx_full, rx_empty,
+					rx_full, rx_empty, rx_done_tick,
 					ready,
 			input [WIDTH-1:0] data_in,
 			input wr_data, rd_data, rx, clk, reset
 	);
-		localparam SB = SB_TICK / S; 
-		wire rx_done_tick,
-			 tx_done_tick,
+		wire tx_done_tick,
 			 rx_ready,
 			 s_tick;
 		assign ready = rx_ready;

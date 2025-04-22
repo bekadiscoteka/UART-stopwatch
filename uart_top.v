@@ -10,7 +10,7 @@ module uart_top
 				SB=1,
 					
 				S=16,
-				BAUND_RATE=9600,
+				BAUND_RATE=9600, // initial baund rate, optional
 
 				FIFO_DEPTH=8
 	)

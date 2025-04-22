@@ -17,6 +17,13 @@ module division #(parameter W=8) (
 	reg [W*2-1:0] db_dvnd;
 	reg [1:0] state;
 
+	reg [W*2-1:0] nxt_db_dvnd;
+	reg [1:0] nxt_state;
+	reg [W-1:0] nxt_rmd;
+	reg [W-1:0] nxt_quo;
+	reg [9:0] nxt_counter;
+
+	wire [W-1:0] temp_dvnd = db_dvnd[W*2-1:W];
 
 	reg [9:0] counter;
 
@@ -37,13 +44,7 @@ module division #(parameter W=8) (
 		end
 	end
 
-	reg [W*2-1:0] nxt_db_dvnd;
-	reg [1:0] nxt_state;
-	reg [W-1:0] nxt_rmd;
-	reg [W-1:0] nxt_quo;
-	reg [9:0] nxt_counter;
 
-	wire [W-1:0] temp_dvnd = db_dvnd[W*2-1:W];
 	always @* begin
 		case (state) 
 			READY: begin

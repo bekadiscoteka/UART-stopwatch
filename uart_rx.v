@@ -4,7 +4,7 @@
 	module uart_rx #(
 		parameter DBIT=8,
 				  S=16,
-				  SB_TICK=S
+				  SB_TICK=16
 	)
 	(
 		output reg [7:0] d_out,
@@ -23,6 +23,13 @@
 
 		localparam BAUND_DETECT=0,
 				   OPERATE=1;
+		reg [log(S):0] s_operate_reg;
+		reg [7:0] cycle;
+		reg [31:0] temp_cycle_per_byte, cycle_per_byte;
+		reg [log(DBIT):0] n;
+		reg div_start;
+		reg state;
+		reg [1:0] operate_state, baund_detect_state;
 
 		division #(.W(32)) divide (
 			.clk(clk),
@@ -34,13 +41,7 @@
 			.quo(m_out)
 		);
 
-		reg [log(S):0] s_operate_reg;
-		reg [7:0] cycle;
-		reg [31:0] temp_cycle_per_byte, cycle_per_byte;
-		reg [log(DBIT):0] n;
-		reg div_start;
-		reg state;
-		reg [1:0] operate_state, baund_detect_state;
+
 
 		assign ready = (state == OPERATE) && (operate_state == IDLE);
 		always @(posedge clk, posedge reset) begin
@@ -67,13 +68,13 @@
 									cycle <= 0;
 									if (!rx) cycle_per_byte <= temp_cycle_per_byte + 1;
 									temp_cycle_per_byte <= 
-										temp_cycle_per_byte + 1;	
+										temp_cycle_per_byte + 1;	//this part is very sensitive
 									if (temp_cycle_per_byte == 
-										(50_000_000 / 200)) begin //((1/300 * 16) / (1/50_000_000))) begin 
-										//slowest baund can be 300 baund 
+										(100000)) begin //dont touch, very sensitive 
+										//slowest baund can be 500 baund, i dont know why
 									   	baund_detect_state <= STOP;
 										cycle <= 0;
-										$display("cycle per byte: %", cycle_per_byte);
+										$display("cycle per byte: %d", cycle_per_byte);
 									end
 								end
 								else if (!rx) begin

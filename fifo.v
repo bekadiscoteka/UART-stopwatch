@@ -18,9 +18,9 @@
 		reg write_en=1;	
 		reg [1:0] state;
 		
-		reg [log(N+1)-1:0] write_addr, read_addr;	
-		wire [log(N+1)-1:0] nxt_write_addr = write_addr + 2'd1;
-		wire [log(N+1)-1:0] nxt_read_addr = read_addr + 2'd1;
+		reg [log(N):0] write_addr, read_addr;	
+		wire [log(N):0] nxt_write_addr = write_addr + 2'd1;
+		wire [log(N):0] nxt_read_addr = read_addr + 2'd1;
 		reg [W-1:0] mem [0:N-1];
 		always @(posedge clk) 
 			if (write_en) mem[write_addr] <= in;
