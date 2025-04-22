@@ -19,7 +19,7 @@ module bcd_counter(
 					bcd1,
 					bcd0,
 	output done_tick, 
-	input start, reset, clk_50MHz
+	input start, reset, clk_50MHz, clear_tick
 );
 	parameter CLK_DIVIDE=0;
 	bcd2sseg_active_low convert(
@@ -51,6 +51,14 @@ module bcd_counter(
 		
 	always @(posedge clk_50MHz, posedge reset) begin
 		if (reset) begin
+			bcd5 <= 9;
+			bcd4 <= 9;
+			bcd3 <= 0;
+			bcd2 <= 0;
+			bcd1 <= 0;
+			bcd0 <= 0;
+		end
+		else if (clear_tick) begin
 			bcd5 <= 9;
 			bcd4 <= 9;
 			bcd3 <= 0;

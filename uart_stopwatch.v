@@ -28,7 +28,7 @@ module uart_stopwatch
 );
 
 	localparam SB_TICK=SB*S;
-	wire do_write, go, pause, receive;
+	wire do_write, go, pause, receive, clear_tick;
 	wire [7:0] ascii, seq;
 	wire [3:0] d3, d2, d1, d0;
 	wire rx_full, rx_empty;	
@@ -59,7 +59,8 @@ module uart_stopwatch
 		.go(go),
 		.pause(pause),
 		//.reverse(reverse),
-		.receive(receive)
+		.receive(receive),
+		.clear(clear_tick)
 	);
 
 	stopwatch sw(
@@ -70,6 +71,7 @@ module uart_stopwatch
 		.d2(d2),
 		.d1(d1),
 		.d0(d0),
+		.clear_tick(clear_tick),
 		.sseg0(sseg0),
 		.sseg1(sseg1),
 		.sseg2(sseg2),

@@ -8,6 +8,7 @@
 				//reverse,
 				pause,
 				receive,
+				clear_tick,
 		input clk, reset
 	);
 		reg start;
@@ -19,6 +20,7 @@
 			.bcd2(d2),
 			.bcd1(d1),
 			.bcd0(d0),
+			.clear_tick(clear_tick),
 			.sseg3(sseg3),
 			.sseg2(sseg2),
 			.sseg1(sseg1),
