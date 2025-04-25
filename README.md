@@ -22,6 +22,9 @@ An FPGA-based stopwatch that **automatically detects baud rate**, counts time wi
   | `c` / `C` | Clear (reset) the stopwatch |
   | `r` / `R` | Receive the current time via UART |
 
+  Watch it in action:  
+[![Demo Video](https://img.youtube.com/vi/HNC9ARV29Qs/0.jpg)]([https://youtu.be/HNC9ARV29Qs?si=Q1hFCuhOhmJZtufv](https://youtu.be/-5vMRhQ4sdg?si=xdsuIJsofNL2X6w2))
+
 ---
 
 ## 🧠 How It Works
@@ -32,6 +35,7 @@ An FPGA-based stopwatch that **automatically detects baud rate**, counts time wi
 3. Now you can **control the stopwatch** using ASCII characters.
 
 ---
+
 
 
 
