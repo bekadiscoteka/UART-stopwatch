@@ -23,7 +23,7 @@ An FPGA-based stopwatch that **automatically detects baud rate**, counts time wi
   | `r` / `R` | Receive the current time via UART |
 
   Watch it in action:  
-[![Demo Video](https://img.youtube.com/vi/HNC9ARV29Qs/0.jpg)]([https://youtu.be/HNC9ARV29Qs?si=Q1hFCuhOhmJZtufv](https://youtu.be/-5vMRhQ4sdg?si=xdsuIJsofNL2X6w2))
+[![Demo Video](https://youtu.be/-5vMRhQ4sdg?si=Hnaz0--3PZkILry6)
 
 ---
 
